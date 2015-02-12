@@ -4,7 +4,10 @@ class MessagesController < ApplicationController
   end
 
   def create
-    Message.create(params.slice(:username, :message))
+    Message.create(
+      username: params[:username],
+      message: params[:message]
+    )
     redirect_to '/messages'
   end
 end
