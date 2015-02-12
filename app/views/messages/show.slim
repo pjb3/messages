@@ -1,0 +1,35 @@
+.container
+  h1 Messages
+
+  - if @messages.present?
+    - for message in @messages
+      .well= simple_format message.message
+      p
+        = "Posted "
+        strong= time_ago_in_words(message.created_at)
+        = " ago by "
+        strong= message.username
+        = " at "
+        strong= message.created_at.strftime("%l:%M %p")
+        = " on "
+        strong= message.created_at.strftime("%A, %B %d %Y")
+
+  hr
+
+  h2 Post a New Message
+
+  = form_tag({}, class: 'form-horizontal')
+
+    .form-group
+      label.col-md-2.control-label for="username" Username
+      .col-md-10
+        input.form-control type="text" name="username" id="username"
+
+    .form-group
+      label.col-md-2.control-label for="message" Message
+      .col-md-10
+        textarea.form-control name="message" rows="5" cols="80"
+
+    .form-group
+      .col-md-offset-2.col-md-10
+        button.btn.btn-primary type="submit" Post
