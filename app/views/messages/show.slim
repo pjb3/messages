@@ -18,17 +18,24 @@
 
   h2 Post a New Message
 
+  - if @message.errors.present?
+    .alert.alert-danger role="alert"
+      ul
+        - for error in @message.errors.full_messages
+          li= error
+
   = form_tag({}, class: 'form-horizontal')
 
     .form-group
       label.col-md-2.control-label for="username" Username
       .col-md-10
-        input.form-control type="text" name="username" id="username"
+        input.form-control type="text" name="username" id="username" value=@message.username
 
     .form-group
       label.col-md-2.control-label for="message" Message
       .col-md-10
         textarea.form-control name="message" rows="5" cols="80"
+          = @message.message
 
     .form-group
       .col-md-offset-2.col-md-10
